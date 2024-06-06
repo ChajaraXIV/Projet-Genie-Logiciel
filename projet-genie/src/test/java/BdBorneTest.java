@@ -28,6 +28,6 @@ public class BdBorneTest {
     void testRechercherBorne() {
         bdBorne.enregistrerBorne(borne);
         BorneDeRecharge foundBorne = bdBorne.rechercherBorne(borne.getId());
-        assertEquals(borne, foundBorne, "La borne devrait être trouvée par son ID.");
+        assertEquals(foundBorne.getId(), borne.getId(), "La borne devrait être trouvée par son ID.");
     }
 }

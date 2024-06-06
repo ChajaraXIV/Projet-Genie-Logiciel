@@ -14,7 +14,7 @@ public class BorneDeRechargeTest {
 
     @Test
     void testBorneDeRechargeCreation() {
-        assertEquals("B1", borne.getId());
+        assertEquals(1, borne.getId());
         assertEquals("Disponible", borne.getEtat());
     }
 
