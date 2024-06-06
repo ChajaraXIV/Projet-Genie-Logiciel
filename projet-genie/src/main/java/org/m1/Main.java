@@ -1,3 +1,4 @@
+package org.m1;
 import java.util.Scanner;
 
 public class Main {

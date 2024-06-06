@@ -1,3 +1,4 @@
+package org.m1;
 public class BorneDeRecharge {
     private int id;
     private boolean disponible;

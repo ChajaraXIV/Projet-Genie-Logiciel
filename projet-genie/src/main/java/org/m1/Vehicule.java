@@ -1,3 +1,4 @@
+package org.m1;
 public class Vehicule {
     private String numeroImmatriculation;
 
