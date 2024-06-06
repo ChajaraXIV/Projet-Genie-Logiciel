@@ -94,4 +94,6 @@ Le projet est structuré en plusieurs classes principales :
 
 Clonez le projet depuis le dépôt GitHub 
 
-pour avoir les fonctionnalités d'admin il fait entrer le mot de passe admin
+## Remarque
+
+Pour avoir les fonctionnalités d'administration, il faut entrer le mot de passe admin.
