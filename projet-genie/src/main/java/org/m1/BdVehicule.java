@@ -18,6 +18,14 @@ public class BdVehicule {
         vehicules.add(vehicule);
     }
 
+    public void afficherVehicules(){
+        System.out.println("Liste des véhicules enregistrés :");
+        for (Vehicule vehicule : vehicules) {
+            System.out.println("- " + vehicule.getNumeroImmatriculation());
+        }
+    }
+
+
     public Vehicule trouverVehiculeParNumeroPlaque(String numeroPlaque) {
         for (Vehicule vehicule : vehicules) {
             if (vehicule.getNumeroImmatriculation().equals(numeroPlaque)) {
