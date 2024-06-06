@@ -94,9 +94,8 @@ Le projet est structuré en plusieurs classes principales :
 
 Clonez le projet depuis le dépôt GitHub :
 
-    git clone https://github.com/votre-utilisateur/votre-repo.git
-    cd votre-repo
-
+    git clone https://github.com/ChajaraXIV/Projet-Genie-Logiciel﻿
+    
 ## Remarque
 
 Pour avoir les fonctionnalités d'administration, il faut entrer le mot de passe admin.
