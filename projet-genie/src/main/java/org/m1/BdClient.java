@@ -37,4 +37,24 @@ public class BdClient {
             System.out.println("**************************************");        
         }
     }
+
+    public Client trouverClientParNumeroPlaque(String numeroPlaque) {
+        for (Client client : clients) {
+            for (Vehicule vehicule : client.getVehicules()) {
+                if (vehicule.getNumeroImmatriculation().equals(numeroPlaque)) {
+                    return client;
+                }
+            }
+        }
+        return null; // Aucun client trouvé
+    }
+
+    public Client trouverClientParNumeroMobile(String numeroMobile) {
+        for (Client client : clients) {
+            if (client.getNumeroMobile().equals(numeroMobile)) {
+                return client;
+            }
+        }
+        return null; // Aucun client trouvé
+    }
 }

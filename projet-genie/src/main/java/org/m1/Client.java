@@ -23,6 +23,13 @@ public class Client {
         this.vehicules = new ArrayList<>();
     }
 
+    public Boolean hasVehicule() {
+        if (vehicules.size() > 0){
+            return true;
+        }
+        return false;
+    }
+
     public void enregistrerNouveauClient(BdClient bd) {
         String nom, prenom, adresse, email, numeroMobile, numeroCarteDebit;
         int choix, choixAutre = 0;

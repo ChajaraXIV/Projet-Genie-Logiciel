@@ -22,26 +22,53 @@ public class Reservation {
         this.borne = borne;
     }
 
-    public void faireUneReservation(BdBorne bdBorne, BdReservation bdReservation) {
+    public void faireUneReservation(BdBorne bdBorne, BdReservation bdReservation, BdClient bdClient, BdVehicule bdVehicule) {
         System.out.print("Entrez le numéro d'immatriculation : ");
-        String numeroPlaqueOuReservation = scanner.nextLine();
-
+        String numeroPlaque = scanner.nextLine();
+    
+        // Vérifier si le véhicule existe déjà dans la base de données
+        Vehicule vehicule = bdVehicule.trouverVehiculeParNumeroPlaque(numeroPlaque);
+        Client client = null;
+    
+        if (vehicule != null) {
+            // Le véhicule existe, récupérer le client associé
+            client = bdClient.trouverClientParNumeroPlaque(numeroPlaque);
+        } else {
+            // Le véhicule n'existe pas, demander le numéro de téléphone
+            System.out.print("Numéro de plaque non reconnu. Entrez votre numéro de mobile : ");
+            String numeroMobile = scanner.nextLine();
+    
+            // Vérifier si le client existe dans la base de données
+            client = bdClient.trouverClientParNumeroMobile(numeroMobile);
+    
+            if (client != null) {
+                // Créer une nouvelle association véhicule-client et ajouter le véhicule à la base de données
+                vehicule = new Vehicule(numeroPlaque);
+                client.ajouterVehicule(vehicule);
+                bdVehicule.ajouterVehicule(vehicule);
+            } else {
+                System.out.println("Numéro de mobile non reconnu. Veuillez vous inscrire.");
+                return; // Fin de la méthode si le client n'existe pas
+            }
+        }
+    
+        System.out.print("Entrez la durée prévue de recharge (en heures) : ");
+        int dureeRecharge = scanner.nextInt();
+        scanner.nextLine(); // Consommer la nouvelle ligne
+    
         // Trouver une borne disponible
         BorneDeRecharge borneDisponible = bdBorne.trouverBorneDisponible();
-
-        if (borneDisponible != null) {
-            // Traitement si une borne disponible a été trouvée
-            System.out.println("Une borne de recharge est disponible : " + borneDisponible.getId());
-
+    
+        if (borneDisponible != null) {    
             // Créer une réservation avec la borne disponible
             LocalDateTime debutReservation = LocalDateTime.now();
-            LocalDateTime finReservation = debutReservation.plusHours(1); // Par exemple, une réservation d'une heure
+            LocalDateTime finReservation = debutReservation.plusHours(dureeRecharge);
             String numeroReservation = Reservation.generateNumeroReservation(); // Générer un numéro de réservation unique
-            Reservation reservation = new Reservation(numeroPlaqueOuReservation, numeroReservation, debutReservation, finReservation, borneDisponible);
+            Reservation reservation = new Reservation(numeroPlaque, numeroReservation, debutReservation, finReservation, borneDisponible);
             bdReservation.ajouterReservation(reservation);
-
+    
             System.out.println("Réservation créée : " + reservation);
-
+    
             // Mettre à jour l'état de disponibilité de la borne
             borneDisponible.changerDisponibilite();
             System.out.println("État de disponibilité de la borne après réservation : " + borneDisponible.isDisponible());
@@ -50,6 +77,7 @@ public class Reservation {
             System.out.println("Aucune borne de recharge disponible.");
         }
     }
+    
 
     // Getters et Setters
     public String getNumeroPlaque() {
