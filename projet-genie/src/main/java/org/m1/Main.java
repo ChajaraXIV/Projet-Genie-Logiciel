@@ -19,7 +19,9 @@ public class Main {
             System.out.println("2. Afficher les clients enregistrés");
             System.out.println("3. Faire une réservation");
             System.out.println("4. Afficher les réservations");
-            System.out.println("5. Quitter");
+            System.out.println("5. Enregistrer un véhicule");
+            System.out.println("6. Afficher les véhicules enregistrées");
+            System.out.println("7. Quitter");
 
             int choix = scanner.nextInt();
             scanner.nextLine();
@@ -40,6 +42,13 @@ public class Main {
                     BdReservation.afficherReservations();
                     break;
                 case 5:
+                    Vehicule v = new Vehicule();
+                    v.enregistrerVehicule(BdClient,BdVehicule);
+                    break;
+                case 6:
+                    BdVehicule.afficherVehicules();
+                    break;
+                case 7:
                     System.out.println("Merci d'avoir utilisé notre application. Au revoir !");
                     System.exit(0);
                     break;
