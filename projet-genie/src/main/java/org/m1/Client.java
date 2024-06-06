@@ -93,7 +93,7 @@ public class Client {
 
         bd.enregistrerClient(client);
 
-        System.out.println("Le client a été enregistré avec succes : " + client);
+        System.out.println("Le client a été enregistré avec succés.");
     }
 
     private boolean isValidNumber(String num, BdClient bd){
