@@ -92,7 +92,10 @@ Le projet est structuré en plusieurs classes principales :
 
 ## Installation
 
-Clonez le projet depuis le dépôt GitHub 
+Clonez le projet depuis le dépôt GitHub :
+
+    git clone https://github.com/votre-utilisateur/votre-repo.git
+    cd votre-repo
 
 ## Remarque
 
