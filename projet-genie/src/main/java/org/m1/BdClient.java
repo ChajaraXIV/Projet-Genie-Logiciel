@@ -8,7 +8,10 @@ public class BdClient {
     public BdClient() {
         this.clients = new ArrayList<>();
     }
-
+    
+    public List<Client> getClients(){
+        return clients;
+    }
     public void enregistrerClient(Client client) {
         clients.add(client);
     }

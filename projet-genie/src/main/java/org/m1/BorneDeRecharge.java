@@ -1,26 +1,22 @@
 package org.m1;
 public class BorneDeRecharge {
     private int id;
-    private boolean disponible;
+    private String Etat;
 
-    public BorneDeRecharge(int id, boolean disponible) {
+    public BorneDeRecharge(int id, String Etat) {
         this.id = id;
-        this.disponible = true;
+        this.Etat = Etat;
     }
 
     public int getId() {
         return id;
     }
 
-    public boolean isDisponible() {
-        return disponible;
+    public String getEtat() {
+        return Etat;
     }
 
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
+    public void setEtat(String Etat) {
+        this.Etat = Etat;
     }
-    
-    public void changerDisponibilite() {
-        this.disponible = !this.disponible; // Inverse l'état de disponibilité de la borne
-    } 
 }

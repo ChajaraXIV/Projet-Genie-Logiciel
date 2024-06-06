@@ -10,6 +10,10 @@ public class BdVehicule {
         this.vehicules = new ArrayList<>();
     }
 
+    public List<Vehicule> getVehicules(){
+        return this.vehicules;
+    }
+
     public void ajouterVehicule(Vehicule vehicule) {
         vehicules.add(vehicule);
     }

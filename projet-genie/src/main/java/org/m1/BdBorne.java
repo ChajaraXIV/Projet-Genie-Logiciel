@@ -10,12 +10,16 @@ public class BdBorne {
         initialiserBornesDeRecharge();
     }
 
+    public List<BorneDeRecharge> getBornes(){
+        return this.borneDeRecharge;
+    }
+
     private void initialiserBornesDeRecharge() {
         // Créez et ajoutez vos bornes de recharge à la liste ici
-        BorneDeRecharge borne1 = new BorneDeRecharge(1, true);
-        BorneDeRecharge borne2 = new BorneDeRecharge(2, true);
-        BorneDeRecharge borne3 = new BorneDeRecharge(3, true);
-        BorneDeRecharge borne4 = new BorneDeRecharge(4, true);
+        BorneDeRecharge borne1 = new BorneDeRecharge(1, "disponible");
+        BorneDeRecharge borne2 = new BorneDeRecharge(2, "disponible");
+        BorneDeRecharge borne3 = new BorneDeRecharge(3, "disponible");
+        BorneDeRecharge borne4 = new BorneDeRecharge(4, "disponible");
         enregistrerBorne(borne1);
         enregistrerBorne(borne2);
         enregistrerBorne(borne3);
@@ -34,9 +38,18 @@ public class BdBorne {
         return borneDeRecharge.get(index);
     }
 
+    public BorneDeRecharge rechercherBorne(int id){
+        for (BorneDeRecharge borne : borneDeRecharge) {
+            if (borne.getId() == id) {
+                return borne;
+            }
+        }
+        return null;
+    }
+
     public BorneDeRecharge trouverBorneDisponible() {
         for (BorneDeRecharge borne : borneDeRecharge) {
-            if (borne.isDisponible() == true) {
+            if (borne.getEtat() == "disponible") {
                 return borne;
             }
         }

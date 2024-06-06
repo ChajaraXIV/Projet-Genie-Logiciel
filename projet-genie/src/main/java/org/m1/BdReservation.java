@@ -17,6 +17,10 @@ public class BdReservation {
         
     }
 
+    public List<Reservation> getReservations(){
+        return this.reservations;
+    }
+
     public void ajouterReservation(Reservation reserv) {
         reservations.add(reserv);
     }

@@ -1,9 +1,11 @@
 package org.m1;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Reservation {
+    private Client client;
     private String numeroPlaque;
     private String numeroReservation;
     private LocalDateTime debutReservation;
@@ -14,7 +16,8 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(String numeroPlaque, String numeroReservation, LocalDateTime debutReservation, LocalDateTime finReservation, BorneDeRecharge borne) {
+    public Reservation(Client client, String numeroPlaque, String numeroReservation, LocalDateTime debutReservation, LocalDateTime finReservation, BorneDeRecharge borne) {
+        this.client = client;
         this.numeroPlaque = numeroPlaque;
         this.numeroReservation = numeroReservation;
         this.debutReservation = debutReservation;
@@ -26,60 +29,57 @@ public class Reservation {
         System.out.print("Entrez le numéro d'immatriculation : ");
         String numeroPlaque = scanner.nextLine();
     
-        // Vérifier si le véhicule existe déjà dans la base de données
         Vehicule vehicule = bdVehicule.trouverVehiculeParNumeroPlaque(numeroPlaque);
         Client client = null;
     
         if (vehicule != null) {
-            // Le véhicule existe, récupérer le client associé
             client = bdClient.trouverClientParNumeroPlaque(numeroPlaque);
         } else {
-            // Le véhicule n'existe pas, demander le numéro de téléphone
             System.out.print("Numéro de plaque non reconnu. Entrez votre numéro de mobile : ");
             String numeroMobile = scanner.nextLine();
     
-            // Vérifier si le client existe dans la base de données
             client = bdClient.trouverClientParNumeroMobile(numeroMobile);
     
             if (client != null) {
-                // Créer une nouvelle association véhicule-client et ajouter le véhicule à la base de données
                 vehicule = new Vehicule(numeroPlaque);
                 client.ajouterVehicule(vehicule);
                 bdVehicule.ajouterVehicule(vehicule);
             } else {
                 System.out.println("Numéro de mobile non reconnu. Veuillez vous inscrire.");
-                return; // Fin de la méthode si le client n'existe pas
+                return;
             }
         }
     
         System.out.print("Entrez la durée prévue de recharge (en heures) : ");
         int dureeRecharge = scanner.nextInt();
-        scanner.nextLine(); // Consommer la nouvelle ligne
+        scanner.nextLine();
     
-        // Trouver une borne disponible
         BorneDeRecharge borneDisponible = bdBorne.trouverBorneDisponible();
     
         if (borneDisponible != null) {    
-            // Créer une réservation avec la borne disponible
             LocalDateTime debutReservation = LocalDateTime.now();
             LocalDateTime finReservation = debutReservation.plusHours(dureeRecharge);
-            String numeroReservation = Reservation.generateNumeroReservation(); // Générer un numéro de réservation unique
-            Reservation reservation = new Reservation(numeroPlaque, numeroReservation, debutReservation, finReservation, borneDisponible);
+            String numeroReservation = Reservation.generateNumeroReservation();
+            Reservation reservation = new Reservation(client, numeroPlaque, numeroReservation, debutReservation, finReservation, borneDisponible);
             bdReservation.ajouterReservation(reservation);
     
             System.out.println("Réservation créée : " + reservation);
     
-            // Mettre à jour l'état de disponibilité de la borne
-            borneDisponible.changerDisponibilite();
-            System.out.println("État de disponibilité de la borne après réservation : " + borneDisponible.isDisponible());
+            borneDisponible.setEtat("réservée");
         } else {
-            // Traitement si aucune borne disponible n'a été trouvée
             System.out.println("Aucune borne de recharge disponible.");
         }
     }
-    
 
     // Getters et Setters
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     public String getNumeroPlaque() {
         return numeroPlaque;
     }
@@ -121,14 +121,14 @@ public class Reservation {
     }
 
     public static String generateNumeroReservation() {
-        // Générez un numéro de réservation unique (par exemple, en concaténant la date actuelle avec un identifiant unique)
         return "RES-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
     }
 
     @Override
     public String toString() {
         return "Reservation{" +
-                "numeroPlaque='" + numeroPlaque + '\'' +
+                "client=" + client +
+                ", numeroPlaque='" + numeroPlaque + '\'' +
                 ", numeroReservation='" + numeroReservation + '\'' +
                 ", debutReservation=" + debutReservation +
                 ", finReservation=" + finReservation +
