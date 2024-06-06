@@ -18,6 +18,8 @@ Le projet est structuré en plusieurs classes principales :
 - **BdClient** : Base de données simulée pour les clients.
 - **BdReservation** : Base de données simulée pour les réservations.
 - **BdVehicule** : Base de données simulée pour les véhicules.
+- **Main** : Classe ou on affiche le menu.
+
 
 
 ## Prérequis
