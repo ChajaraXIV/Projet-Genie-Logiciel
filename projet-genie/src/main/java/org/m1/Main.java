@@ -6,6 +6,7 @@ public class Main {
     private static BdClient BdClient = new BdClient();
     private static BdReservation BdReservation = new BdReservation();
     private static BdBorne BdBorne = new BdBorne();
+    private static BdVehicule BdVehicule = new BdVehicule();
 
     public static void main(String[] args) {
         afficherMenuPrincipal();
@@ -33,7 +34,7 @@ public class Main {
                     break;
                 case 3:
                     Reservation r = new Reservation();
-                    r.faireUneReservation(BdBorne,BdReservation);
+                    r.faireUneReservation(BdBorne,BdReservation,BdClient,BdVehicule);
                     break;
                 case 4:
                     BdReservation.afficherReservations();

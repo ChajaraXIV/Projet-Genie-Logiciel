@@ -28,4 +28,13 @@ public class BdReservation {
     public Reservation getReservation(int index) {
         return reservations.get(index);
     }
+
+    public Reservation trouverReservationParNumero(String numero) {
+        for (Reservation reservation : reservations) {
+            if (reservation.getNumeroReservation().equals(numero)) {
+                return reservation;
+            }
+        }
+        return null; // Aucune réservation trouvée
+    }
 }
