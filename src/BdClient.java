@@ -1,32 +1,25 @@
-
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class BaseDeDonnes {
+public class BdClient {
     private List<Client> clients;
 
-    public BaseDeDonnes() {
+    public BdClient() {
         this.clients = new ArrayList<>();
     }
 
-    public List<String> enregistrerClient(Client client) {
-        List<String> erreurs = new ArrayList<>();
-
-        // Vérifier si un client avec la même adresse e-mail existe déjà
-        for (Client c : clients) {
-            if (c.getEmail().equals(client.getEmail())) {
-                erreurs.add("Un client avec cette adresse e-mail existe déjà.");
-                return erreurs;
-            }
-        }
-
-        // Ajouter le client à la liste des clients
+    public void enregistrerClient(Client client) {
         clients.add(client);
-        return erreurs;
     }
+
+    public int getSize(){
+        return clients.size();
+    }
+
+    public Client getClient(int index) {
+        return clients.get(index);
+    }
+
     public void afficherClients() {
         System.out.println("Liste des clients enregistrés :");
         for (Client client : clients) {
@@ -39,16 +32,8 @@ public class BaseDeDonnes {
             System.out.println("Véhicules :");
             for (Vehicule vehicule : client.getVehicules()) {
                 System.out.println("- " + vehicule.getNumeroImmatriculation());
-            }        }
-    }
-
-    private boolean clientExisteDeja(String email) {
-        for (Client c : clients) {
-            if (c.getEmail().equals(email)) {
-                return true;
             }
+            System.out.println("**************************************");        
         }
-        return false;
     }
-
 }
