@@ -2,6 +2,7 @@ package org.m1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class BdVehicule {
     private List<Vehicule> vehicules;
@@ -18,12 +19,20 @@ public class BdVehicule {
         vehicules.add(vehicule);
     }
 
-    public void afficherVehicules(){
-        System.out.println("Liste des véhicules enregistrés :");
-        for (Vehicule vehicule : vehicules) {
-            System.out.println("- " + vehicule.getNumeroImmatriculation());
+    public void afficherVehicules() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Veuillez entrer le mot de passe : ");
+        String password = scanner.nextLine();
+        
+        if ("admin".equals(password)) {
+            System.out.println("Liste des véhicules enregistrés :");
+            for (Vehicule vehicule : vehicules) {
+                System.out.println("- " + vehicule.getNumeroImmatriculation());
+            }
+        } else {
+            System.out.println("Accès refusé : mot de passe incorrect.");
         }
-    }
+}
 
 
     public Vehicule trouverVehiculeParNumeroPlaque(String numeroPlaque) {

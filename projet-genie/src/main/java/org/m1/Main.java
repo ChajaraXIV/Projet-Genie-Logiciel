@@ -7,7 +7,6 @@ public class Main {
     private static BdReservation BdReservation = new BdReservation();
     private static BdBorne BdBorne = new BdBorne();
     private static BdVehicule BdVehicule = new BdVehicule();
-
     public static void main(String[] args) {
         afficherMenuPrincipal();
     }

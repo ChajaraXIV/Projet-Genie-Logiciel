@@ -1,6 +1,7 @@
 package org.m1;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class BdClient {
     private List<Client> clients;
@@ -25,19 +26,26 @@ public class BdClient {
     }
 
     public void afficherClients() {
-        System.out.println("Liste des clients enregistrés :");
-        for (Client client : clients) {
-            System.out.println("Nom : " + client.getNom());
-            System.out.println("Prénom : " + client.getPrenom());
-            System.out.println("Adresse : " + client.getAdresse());
-            System.out.println("Adresse e-mail : " + client.getEmail());
-            System.out.println("Numéro de téléphone : " + client.getNumeroMobile());
-            System.out.println("Numéro de carte de débit : " + client.getNumeroCarteDebit());
-            System.out.println("Véhicules :");
-            for (Vehicule vehicule : client.getVehicules()) {
-                System.out.println("- " + vehicule.getNumeroImmatriculation());
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Veuillez entrer le mot de passe : ");
+        String password = scanner.nextLine();
+        if ("admin".equals(password)) {
+            System.out.println("Liste des clients enregistrés :");
+            for (Client client : clients) {
+                System.out.println("Nom : " + client.getNom());
+                System.out.println("Prénom : " + client.getPrenom());
+                System.out.println("Adresse : " + client.getAdresse());
+                System.out.println("Adresse e-mail : " + client.getEmail());
+                System.out.println("Numéro de téléphone : " + client.getNumeroMobile());
+                System.out.println("Numéro de carte de débit : " + client.getNumeroCarteDebit());
+                System.out.println("Véhicules :");
+                for (Vehicule vehicule : client.getVehicules()) {
+                    System.out.println("- " + vehicule.getNumeroImmatriculation());
+                }
+                System.out.println("**************************************");        
             }
-            System.out.println("**************************************");        
+        } else {
+            System.out.println("Accès refusé : mot de passe incorrect.");
         }
     }
 
